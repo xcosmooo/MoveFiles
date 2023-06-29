@@ -1,7 +1,6 @@
 import os
 import shutil
 import time
-import tkinter as tk
 import threading
 
 sourceFile = "testfax.txt"
@@ -18,7 +17,7 @@ def start_script():
     script_thread.start()
 
 def script_loop():
-    global currentIndex, is_running
+    global currentIndex, is_running, sourcePath
     while is_running:
         destinationFolder = destination[currentIndex]
         destinationFolderPath = os.path.join(desktopPath, destinationFolder)
@@ -37,16 +36,7 @@ def script_loop():
 def stop_script():
     global is_running
     is_running = False
+    print(f"Script has been stopped")
 
-# Create GUI
-window = tk.Tk()
-window.title("Script GUI")
-window.geometry("200x100")
-
-start_button = tk.Button(window, text="Start Script", command=start_script)
-start_button.pack()
-
-stop_button = tk.Button(window, text="Stop Script", command=stop_script)
-stop_button.pack()
-
-window.mainloop()
+# Start the script
+start_script()
